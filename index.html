@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Swiss Fertility and Socioeconomic Indicators</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Swiss Fertility and Socioeconomic Indicators">
+  <meta name="author" content="David E. Millan Calero">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Swiss Fertility and Socioeconomic Indicators</h1>
+    <h2>1888 Data</h2>
+    <p>David E. Millan Calero<br/>Data Scientist</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Description</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Standardized fertility measure and socio-economic indicators for each of 47 French-speaking provinces of Switzerland at about 1888.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Format</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>A data frame with 47 observations on 6 variables, each of which is in percent, i.e., in [0, 100].</p>
+
+<p>[,1]   Fertility    Ig, &#39;common standardized fertility measure&#39;</p>
+
+<p>[,2]     Agriculture     % of males involved in agriculture as occupation</p>
+
+<p>[,3]     Examination     % draftees receiving highest mark on army examination</p>
+
+<p>[,4]     Education   % education beyond primary school for draftees.</p>
+
+<p>[,5]     Catholic    % &#39;catholic&#39; (as opposed to &#39;protestant&#39;).</p>
+
+<p>[,6]     Infant.Mortality    live births who live less than 1 year.</p>
+
+<p>All variables but &#39;Fertility&#39; give proportions of the population.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Details</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>(paraphrasing Mosteller and Tukey):</p>
+
+<p>Switzerland, in 1888, was entering a period known as the demographic transition; i.e., its fertility was beginning to fall from the high level typical of underdeveloped countries.</p>
+
+<p>The data collected are for 47 French-speaking &quot;provinces&quot; at about 1888.</p>
+
+<p>Here, all variables are scaled to [0, 100], where in the original, all but &quot;Catholic&quot; were scaled to [0, 1].</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Examples</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">require(stats); require(graphics)
+pairs(swiss, panel = panel.smooth, main = &quot;swiss data&quot;,
+      col = 3 + (swiss$Catholic &gt; 50))
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-1.png" alt="plot of chunk unnamed-chunk-1"> </p>
+
+<pre><code class="r">summary(lm(Fertility ~ . , data = swiss))
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = Fertility ~ ., data = swiss)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -15.274  -5.262   0.503   4.120  15.321 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       66.9152    10.7060    6.25  1.9e-07 ***
+## Agriculture       -0.1721     0.0703   -2.45   0.0187 *  
+## Examination       -0.2580     0.2539   -1.02   0.3155    
+## Education         -0.8709     0.1830   -4.76  2.4e-05 ***
+## Catholic           0.1041     0.0353    2.95   0.0052 ** 
+## Infant.Mortality   1.0770     0.3817    2.82   0.0073 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.17 on 41 degrees of freedom
+## Multiple R-squared:  0.707,  Adjusted R-squared:  0.671 
+## F-statistic: 19.8 on 5 and 41 DF,  p-value: 5.59e-10
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Source and References</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><i>Project &quot;16P5&quot;, pages 549-551 in</p>
+
+<p>Mosteller, F. and Tukey, J. W. (1977) Data Analysis and Regression: A Second Course in Statistics. Addison-Wesley, Reading Mass.</p>
+
+<p>indicating their source as &quot;Data used by permission of Franice van de Walle. Office of Population Research, Princeton University, 1976. Unpublished data assembled under NICHD contract number No 1-HD-O-2077.&quot;</i></p>
+
+<p><b>Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) The New S Language. Wadsworth &amp; Brooks/Cole.</b></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Description'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Format'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Details'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Examples'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Source and References'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
